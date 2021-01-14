@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BTORM.Sample.Test", "..\src\BTORM.Sample.Test\BTORM.Sample.Test.csproj", "{E40E8D3F-22F8-495B-B6BB-9B2C7490BD3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BTORM.Sample.Test", "BTORMSample\BTORM.Sample.Test.csproj", "{E2FE7E2E-4858-46B8-8EE6-8AB3D986588D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E40E8D3F-22F8-495B-B6BB-9B2C7490BD3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E40E8D3F-22F8-495B-B6BB-9B2C7490BD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E40E8D3F-22F8-495B-B6BB-9B2C7490BD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E40E8D3F-22F8-495B-B6BB-9B2C7490BD3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2FE7E2E-4858-46B8-8EE6-8AB3D986588D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2FE7E2E-4858-46B8-8EE6-8AB3D986588D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2FE7E2E-4858-46B8-8EE6-8AB3D986588D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2FE7E2E-4858-46B8-8EE6-8AB3D986588D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

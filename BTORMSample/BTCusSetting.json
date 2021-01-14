@@ -1,0 +1,16 @@
+{
+  "connectionString": [
+        {
+
+      "dbType": "System.Data.SqlClient",
+      "name": "MainData.Reader",
+      "value": "Min Pool Size=10;Max Pool Size=500;Connection Timeout=50;Data Source=.;Initial Catalog=tablename;Persist Security Info=True;User ID=username;Password=pwd; pooling=false"
+    },
+    {
+
+      "dbType": "System.Data.SqlClient",
+      "name": "MainData.Writer",
+      "value": "Min Pool Size=10;Max Pool Size=500;Connection Timeout=50;Data Source=.;Initial Catalog=tablename;Persist Security Info=True;User ID=username;Password=pwd; pooling=false"
+    }
+  ]
+}
