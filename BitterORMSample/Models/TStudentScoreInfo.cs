@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using BT.Manage.Core;
-using BT.Manage.Tools.Attributes;
+using Bitter.Core;
+using Bitter.Tools.Attributes;
 
-namespace BTORM.Sample.Test
+namespace Bitter.Sample.Test
 {
     [TableName("t_StudentScore")]
     public class TStudentScoreInfo : BaseModel

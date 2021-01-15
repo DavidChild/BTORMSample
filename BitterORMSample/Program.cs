@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using BT.Manage.Core;
-namespace BTORM.Sample.Test
+using Bitter.Core;
+using BTORM.Sample.Test;
+
+namespace Bitter.Sample.Test
 {
     class Program
     {
