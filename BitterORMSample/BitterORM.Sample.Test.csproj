@@ -6,7 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bitter.Core.NetCore" Version="2.2.8.1" />
+    <PackageReference Include="Bitter.Core.NetCore" Version="2.2.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Bitter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

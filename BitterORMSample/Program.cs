@@ -10,6 +10,8 @@ namespace Bitter.Sample.Test
     {
         static void Main(string[] args)
         {
+            InitData();
+
             // 根据ID 查询：
             var student = db.FindQuery<TStudentInfo>().QueryById(12);
 
@@ -138,6 +140,10 @@ namespace Bitter.Sample.Test
 
         }
 
+
+
+
+      
         /// <summary>
         /// 插入，删除，更新示例(模型驱动)
         /// </summary>
@@ -187,6 +193,7 @@ namespace Bitter.Sample.Test
             }
 
         }
+
 
 
         /// <summary>
@@ -263,5 +270,67 @@ namespace Bitter.Sample.Test
 
         }
 
+
+       /// <summary>
+       /// 初始化数据
+       /// </summary>
+        public static void InitData()
+        {
+            int count = 11;
+            int ix = 0;
+            //年级
+            for (ix = 0; ix <= count; ix++)
+            {
+                TGRADEInfo info = new TGRADEInfo();
+                info.FName = "年级_" + ix;
+                info.FAddTime = DateTime.Now;
+                info.Insert().Submit();
+                
+            }
+            //班级
+            for (ix = 0; ix <= count; ix++)
+            {
+                TClassInfo info = new TClassInfo();
+                info.FName = "班级_" + ix;
+                Random rd = new Random();
+
+                info.FGradeId = rd.Next(1, 10);
+                info.FAddTime = DateTime.Now;
+                info.Insert().Submit();
+
+
+            }
+            //学生
+            count = 1000;
+            for (ix = 0; ix <= count; ix++)
+            {
+                TStudentInfo info = new TStudentInfo();
+                info.FName = "HJB" + ix;
+                Random rd = new Random();
+                info.FClassId = rd.Next(2,9);
+                info.FAddTime = DateTime.Now;
+                Random rdage = new Random();
+                info.FAage = rdage.Next(16,20);
+                info.Insert().Submit();
+
+            }
+
+            //学分
+            count = 2000;
+            for (ix=0; ix <= count;ix++)
+            {
+                TStudentScoreInfo info = new TStudentScoreInfo();
+                
+                Random rd = new Random();
+                info.FStudentId = rd.Next(2, 99);
+              
+                info.FAddTime = DateTime.Now;
+                Random rdage = new Random();
+                info.FScore = rdage.Next(1, 100);
+                info.Insert().Submit();
+
+            }
+
+        }
     }
 }
