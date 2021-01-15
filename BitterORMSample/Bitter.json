@@ -4,13 +4,13 @@
 
       "dbType": "System.Data.SqlClient",
       "name": "MainData.Reader",
-      "value": "Min Pool Size=10;Max Pool Size=500;Connection Timeout=50;Data Source=192.168.100.85,12033;Initial Catalog=BTManageData;Persist Security Info=True;User ID=test;Password=AK2016126rl; pooling=false"
+      "value": "Min Pool Size=10;Max Pool Size=500;Connection Timeout=50;Data Source=.;Initial Catalog=databasename;Persist Security Info=True;User ID=test;Password=pwd; pooling=false"
     },
     {
 
       "dbType": "System.Data.SqlClient",
       "name": "MainData.Writer",
-      "value": "Min Pool Size=10;Max Pool Size=500;Connection Timeout=50;Data Source=192.168.100.85,12033;Initial Catalog=BTManageData;Persist Security Info=True;User ID=test;Password=AK2016126rl; pooling=false"
+      "value": "Min Pool Size=10;Max Pool Size=500;Connection Timeout=50;Data Source=.;Initial Catalog=databasename;Persist Security Info=True;User ID=test;Password=pwd; pooling=false"
     }
   ]
 }
