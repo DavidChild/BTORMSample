@@ -10,7 +10,7 @@ namespace Bitter.Sample.Test
     {
         static void Main(string[] args)
         {
-            InitData();
+          
 
             // 根据ID 查询：
             var student = db.FindQuery<TStudentInfo>().QueryById(12);
@@ -270,10 +270,9 @@ namespace Bitter.Sample.Test
 
         }
 
-
-       /// <summary>
-       /// 初始化数据
-       /// </summary>
+        /// <summary>
+        /// 初始化数据
+        /// </summary>
         public static void InitData()
         {
             int count = 11;
@@ -285,7 +284,7 @@ namespace Bitter.Sample.Test
                 info.FName = "年级_" + ix;
                 info.FAddTime = DateTime.Now;
                 info.Insert().Submit();
-                
+
             }
             //班级
             for (ix = 0; ix <= count; ix++)
@@ -307,23 +306,23 @@ namespace Bitter.Sample.Test
                 TStudentInfo info = new TStudentInfo();
                 info.FName = "HJB" + ix;
                 Random rd = new Random();
-                info.FClassId = rd.Next(2,9);
+                info.FClassId = rd.Next(2, 9);
                 info.FAddTime = DateTime.Now;
                 Random rdage = new Random();
-                info.FAage = rdage.Next(16,20);
+                info.FAage = rdage.Next(16, 20);
                 info.Insert().Submit();
 
             }
 
             //学分
             count = 2000;
-            for (ix=0; ix <= count;ix++)
+            for (ix = 0; ix <= count; ix++)
             {
                 TStudentScoreInfo info = new TStudentScoreInfo();
-                
+
                 Random rd = new Random();
                 info.FStudentId = rd.Next(2, 99);
-              
+
                 info.FAddTime = DateTime.Now;
                 Random rdage = new Random();
                 info.FScore = rdage.Next(1, 100);
@@ -332,5 +331,6 @@ namespace Bitter.Sample.Test
             }
 
         }
+
     }
 }
