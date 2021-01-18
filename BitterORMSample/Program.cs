@@ -270,9 +270,88 @@ namespace Bitter.Sample.Test
 
         }
 
+
         /// <summary>
-        /// 初始化数据
+        /// 事务代码详细教程
         /// </summary>
+        public static void DbScopeDemo()
+        {
+            dbscope dbs = new dbscope(); //示例化事务收集器
+            //说明：事务收集器 dbscope.dotrancation 的参数是一个匿名委托方法
+            dbs.dotrancation((list, models, bulkcopymodels) =>
+            {
+                TGRADEInfo gRadeinfo = new TGRADEInfo();
+                gRadeinfo.FName = "年级_" + 1;
+                gRadeinfo.FAddTime = DateTime.Now;
+                var gradid = gRadeinfo.AddInScope(models); /**
+                                                    * 如果 下面的代码需要用到新增数据的在数据库的自增种子ID，并且又需要通过事务执行。怎么办？
+                                                    * 如 gRadeinfo  对象是一个年级新增实例，但是下面的 classInfo 班级新增实例 中的  FGradeId 关联了  gRadeinfo 中的 主键ID。
+                                                    * 那么新增模型 可以通过 db.dotrancation 的匿名委托方法中通过 AddInScope 方法操作， 
+                                                    * 在事务中先将先执行gRadeinfo执行到数据库中,获取到ID，然后将此模型缓存起来，
+                                                    * 如果事务执行失败，那么此模型行将自动执行删除操作！
+                                                  */
+                if (gradid <= 0)
+                {
+                    throw (new Exception("错误：终止事务！")); 
+                }
+
+                TClassInfo classInfo = new TClassInfo();
+                classInfo.FName = "班级201";
+                Random rd = new Random();
+                classInfo.FGradeId = gradid; //使用上面新增的 gRadeinfo 数据库新产生的 自增长主键Id 
+                classInfo.FAddTime = DateTime.Now;
+                classInfo.Insert().AddInScope(list); // 塞入 到  list-- sqlquery 收集器中 中，等待提交执行
+
+                 //学生
+                var count = 20;
+                for (int ci = 0; ci <= count; ci++)
+                {
+                    TStudentInfo info = new TStudentInfo();
+                    info.FName = "HJB" + ci;
+
+
+                    info.FClassId = 2;
+                    info.FAddTime = DateTime.Now;
+                    Random rdage = new Random();
+                    info.FAage = rdage.Next(16, 20);
+                    info.BulkCopy().AddInScope(bulkcopymodels);//塞入 到  bulkcopymodels-- bulkcopy 收集器 等待提交执行
+
+                }
+
+
+
+                var sqlcommand = "update t_student set FAge=@age";
+                db.Excut(sqlcommand,new { age=17 }).AddInScope(list); //将裸SQL的操作执行放入 listlist-- sqlquery 收集器中等待执行
+
+                var stduent_1 = db.FindQuery<TStudentInfo>().QueryById(50);
+                stduent_1.FAage = 16;
+                stduent_1.Update().AddInScope(list); // 塞入 到  list-- sqlquery 收集器中 中，等待提交执行
+
+
+                var stduent_2 = db.FindQuery<TStudentInfo>().QueryById(51);
+                stduent_2.FAage = 18;
+                stduent_2.Delete().AddInScope(list); // 塞入 到  list-- sqlquery 收集器中 中，等待提交执行
+            });
+            bool issuccess= dbs.Submit();
+            if (issuccess)
+            {
+                //事务提交执行成功
+            }
+            else
+            {
+                //事务提交失败
+                string failmessage = dbs.ScopeException.Message;
+            }
+        }
+
+
+          
+          
+
+
+            /// <summary>
+            /// 初始化数据
+            /// </summary>
         public static void InitData()
         {
             int count = 11;
