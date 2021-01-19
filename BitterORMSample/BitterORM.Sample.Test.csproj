@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bitter.Core.NetCore" Version="2.2.8.3" />
+    <PackageReference Include="Bitter.Core.NetCore" Version="2.2.8.5" />
   </ItemGroup>
 
   <ItemGroup>
