@@ -135,6 +135,11 @@ namespace Bitter.Sample.Test
             DemoFopOpByDirectSql(11);
             #endregion
 
+
+            #region //WITH 子句的支持
+            With_Page_Demo(1, "H");
+            #endregion
+
             Console.ReadKey();
 
 
@@ -269,6 +274,65 @@ namespace Bitter.Sample.Test
             #endregion
 
         }
+
+        /// <summary>
+        /// 分页查询--WITH 子句的支持
+        /// </summary>
+        /// <returns></returns>
+        public static List<TScoreSearchDto> With_Page_Demo(int type, string studentname)
+        {
+            #region //聚联条件分页查询  年级的LEFT JOIN 子语句 使用WITH 来替代
+
+            var withsql = @"WITH grade as(select* from t_Grade where fid=@id)"; //定义WITH 子句
+            var sql = @"SELECT   score.FScore,student.FName  as studentName,class.FName as className,grade.FName as  gradeName FROM  dbo.t_StudentScore score
+            LEFT JOIN dbo.t_student student  ON score.FStudentId = student.FID
+            LEFT JOIN dbo.t_class class ON  student.FClassId=class.FID
+            LEFT JOIN grade ON grade.FID=class.FGradeId";
+
+            PageQuery pq = new PageQuery(sql, null);
+            pq.AddPreWith(withsql, new { id = 3 });
+           
+
+
+            pq.Where("1=1");
+
+            if (type == 1)
+            {
+                pq.Where("score.FScore>60 ");
+            }
+            if (type == 2)
+            {
+                pq.Where("score.FScore>60 and score.FScore<80 ");
+            }
+            if (!string.IsNullOrEmpty(studentname))
+            {
+                pq.Where(" student.FName like '%' + @FScoreName + '%'", new { FScoreName = studentname });
+            }
+
+            //通过ThenAsc 方法指定字段排序
+            pq.ThenASC("score.FScore ");
+
+            //通过ThenDESC 方法指定字段排序
+            pq.ThenDESC("student.FName");
+
+            //自己直接指定排序字段和排序关键词
+            pq.OrderBy("student.FAddTime desc");
+
+            //分页指定 Skip: 当前页，Take :每页数量
+            pq.Skip(1).Take(10);
+
+            var dt = pq.ToDataTable(); //获取数据
+
+            var studentscount = pq.Count(); //获取当前条件下的数量
+
+
+            return dt.ToListModel<TScoreSearchDto>(); //ToList<T>() DataTable-->List<T> 的模型转换
+
+
+            #endregion
+
+        }
+
 
 
         /// <summary>
